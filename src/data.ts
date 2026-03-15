@@ -131,8 +131,8 @@ users.sojin.posts = [
   { 
     id: 's1', 
     image: 'https://chim9.chimul.uk/z.6.webp', 
-    caption: '아무것도 안 하고 싶다 이미 아무것도 안 하고 있지만 더 격렬하고 적극적으로 아무것도 안 하고 싶다. 개강 왜 함?',
-    hashtags: ['#귀찮아', '#종강언제함', '#침대밖은위험해'],
+    caption: '침대 밖은 위험해... 하루 종일 누워 있고 싶다. 개강 왜 했냐 진짜.',
+    hashtags: ['#침대속', '#집순이', '#귀찮아', '#개강싫어'],
     likes: 42,
     comments: [
       { id: 'sc1', user: users.jiyoon, text: '소진아~ 그래도 수업은 나와야지 ㅠㅠ 출석 체크 내가 해줄까?', likes: 5 },
@@ -142,11 +142,11 @@ users.sojin.posts = [
   { 
     id: 's2', 
     image: 'https://chim9.chimul.uk/z.7.webp', 
-    caption: '몬스터 에너지 수혈 중 🔋 이거 없으면 강의실에서 기절할 듯. 교수님 목소리 ASMR임?',
-    hashtags: ['#몬스터에너지', '#카페인중독', '#졸려죽음'],
+    caption: '당 충전 중... 🍰 이거 먹으려고 겨우 일어남. 달달한 게 최고야.',
+    hashtags: ['#디저트', '#당충전', '#케이크', '#먹스타그램'],
     likes: 35,
     comments: [
-      { id: 'sc3', user: users.minwoo, text: '오 소진아 그거 마시고 운동 오면 펌핑 지리는데 ㅋㅋㅋ', likes: 2 }
+      { id: 'sc3', user: users.minwoo, text: '오 소진아 그거 맛있어 보이네 ㅋㅋㅋ 나중에 나도 한 입?', likes: 2 }
     ]
   }
 ];
@@ -179,8 +179,8 @@ users.eunha.posts = [
   { 
     id: 'e1', 
     image: 'https://chim9.chimul.uk/z.12.webp', 
-    caption: '새로 산 피규어... 너무 예쁘다 ㅠㅠ 💖 역시 2D가 최고야... 현실은 너무 무서워...',
-    hashtags: ['#덕질', '#피규어', '#행복해', '#내세상은여기에'],
+    caption: '나만의 작은 세상... 📚🎧 만화책이랑 안경만 있으면 어디든 갈 수 있어. 감성 돋는 밤.',
+    hashtags: ['#만화책', '#감성사진', '#안경', '#나만의공간'],
     likes: 67,
     comments: [
       { id: 'ec1', user: users.jiyoon, text: '은하야~ 그거 뭐야? 되게 귀엽다! 나중에 구경시켜줘 ㅎㅎ', likes: 4 },
@@ -190,11 +190,11 @@ users.eunha.posts = [
   { 
     id: 'e2', 
     image: 'https://chim9.chimul.uk/z.13.webp', 
-    caption: '오늘도 밤샘 게임 🎮 랭크 올리기 너무 힘들다... 같이 할 사람 없겠지...',
-    hashtags: ['#롤', '#밤샘게임', '#아싸의하루'],
+    caption: '큰맘 먹고 해본 코스프레... 😳 너무 부끄럽지만... 그래도 잘 나온 것 같아서 올려봐요... (도망)',
+    hashtags: ['#코스프레', '#애니', '#부끄러움', '#취미생활'],
     likes: 112,
     comments: [
-      { id: 'ec3', user: users.minwoo, text: '은하야 나랑 듀오 할래? 내가 버스 태워줄게 ㅋㅋㅋ', likes: 15 }
+      { id: 'ec3', user: users.minwoo, text: '은하야 대박 ㅋㅋㅋ 완전 잘 어울리는데? ㅋㅋㅋ', likes: 15 }
     ]
   }
 ];
@@ -203,8 +203,8 @@ users.haein.posts = [
   { 
     id: 'h1', 
     image: 'https://chim9.chimul.uk/z.15.webp', 
-    caption: '오늘 달린다!!! 다 드루와 🍻🔥 술 못 마시는 놈들은 끼지 마라 ㅋㅋㅋ',
-    hashtags: ['#술스타그램', '#불목', '#다죽었어', '#크랙대주당'],
+    caption: '오늘 기분 최고! ✨ 셀카 한 장 투척 ㅋㅋㅋ 다들 오늘 뭐 해? 술 마실 사람?',
+    hashtags: ['#셀카', '#데일리룩', '#기분좋음', '#술친구구함'],
     likes: 245,
     comments: [
       { id: 'hc1', user: users.minwoo, text: '누나 나 대기 중 ㅋㅋㅋ 오늘 3차까지 콜?', likes: 20 },
@@ -214,11 +214,11 @@ users.haein.posts = [
   { 
     id: 'h2', 
     image: 'https://chim9.chimul.uk/z.16.webp', 
-    caption: '오운완. 땀 흘리는 게 최고지 💪 술 마시려고 운동하는 거 맞음 ㅋㅋㅋ',
-    hashtags: ['#오운완', '#헬스', '#득근', '#술마시려고운동함'],
+    caption: '복근 체크 💪🔥 운동한 보람이 있네. 좀 과감한가? ㅋㅋㅋ 그래도 만족!',
+    hashtags: ['#복근', '#오운완', '#바디체크', '#눈바디'],
     likes: 189,
     comments: [
-      { id: 'hc3', user: users.minwoo, text: '누나 등 근육 지리는데? ㅋㅋㅋ 같이 하체 조지자', likes: 12 }
+      { id: 'hc3', user: users.minwoo, text: '누나 복근 지리는데? ㅋㅋㅋ 진짜 대박이다', likes: 12 }
     ]
   }
 ];
@@ -251,12 +251,12 @@ users.jihoon.posts = [
   { 
     id: 'jh1', 
     image: 'https://chim9.chimul.uk/z.21.webp', 
-    caption: '개강 첫 주 복습 완료. 효율적인 시간 관리가 생명이다. 노는 건 시간 낭비일 뿐.',
-    hashtags: ['#공부', '#복습', '#수석목표', '#시간관리'],
+    caption: '지식은 힘이다. 오늘 읽은 책들 정리 중. 배움에는 끝이 없다.',
+    hashtags: ['#독서', '#책스타그램', '#지식', '#자기계발'],
     likes: 45,
     comments: [
-      { id: 'jhc1', user: users.yuri, text: '동감입니다. 저도 복습 마쳤습니다.', likes: 8 },
-      { id: 'jhc2', user: users.minwoo, text: '지훈아 너 그러다 쓰러진다 ㅋㅋㅋ 운동 좀 해라', likes: 3 }
+      { id: 'jhc1', user: users.yuri, text: '좋은 책들이군요. 저도 읽어본 것들입니다.', likes: 8 },
+      { id: 'jhc2', user: users.minwoo, text: '지훈아 책만 보지 말고 밖에도 좀 나와라 ㅋㅋㅋ', likes: 3 }
     ]
   }
 ];
@@ -276,11 +276,11 @@ users.minwoo.posts = [
   { 
     id: 'm2', 
     image: 'https://chim9.chimul.uk/z.24.webp', 
-    caption: '피파 한 판 때리고 학식 조지러 감 ㅋㅋㅋ 역시 운동 후에는 탄수화물이지!',
-    hashtags: ['#피파', '#게임', '#학식', '#벌크업'],
+    caption: '복근 선명도 실화냐? 💪🔥 역시 식단이랑 운동은 배신하지 않아. 뿌듯하다!',
+    hashtags: ['#복근', '#바디체크', '#헬스타그램', '#운동자극'],
     likes: 156,
     comments: [
-      { id: 'mc3', user: users.eunha, text: '피... 피파 말고 롤은 안 하시나요...?', likes: 4 }
+      { id: 'mc3', user: users.eunha, text: '와... 진짜 대단하시네요... (부럽)', likes: 4 }
     ]
   }
 ];
