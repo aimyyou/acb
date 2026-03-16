@@ -5,11 +5,23 @@ import { mainPost, users } from './data';
 type ViewState = 'feed' | 'comments' | 'profile' | 'postDetail';
 
 export default function App() {
-  const [currentView, setCurrentView] = useState<ViewState>('feed');
-  const [previousView, setPreviousView] = useState<ViewState>('feed');
+  const [viewStack, setViewStack] = useState<ViewState[]>(['feed']);
   const [selectedUser, setSelectedUser] = useState<any>(null);
   const [likedPosts, setLikedPosts] = useState<Set<string>>(new Set());
   const [viewingPost, setViewingPost] = useState<{ post: any, user: any } | null>(null);
+  const [revealedSensitivePosts, setRevealedSensitivePosts] = useState<Set<string>>(new Set());
+
+  const currentView = viewStack[viewStack.length - 1];
+
+  const pushView = (view: ViewState) => {
+    setViewStack(prev => [...prev, view]);
+  };
+
+  const popView = () => {
+    if (viewStack.length > 1) {
+      setViewStack(prev => prev.slice(0, -1));
+    }
+  };
 
   const toggleLike = (postId: string) => {
     setLikedPosts(prev => {
@@ -24,32 +36,56 @@ export default function App() {
   };
 
   const navigateToProfile = (user: any) => {
-    setPreviousView(currentView);
     setSelectedUser(user);
-    setCurrentView('profile');
     setViewingPost(null);
+    pushView('profile');
   };
 
   const navigateToComments = () => {
-    setPreviousView(currentView);
-    setCurrentView('comments');
+    pushView('comments');
   };
 
   const navigateToFeed = () => {
-    setPreviousView('feed');
-    setCurrentView('feed');
+    setViewStack(['feed']);
     setViewingPost(null);
   };
 
   const openPostDetail = (post: any, user: any) => {
-    setPreviousView(currentView);
     setViewingPost({ post, user });
-    setCurrentView('postDetail');
+    pushView('postDetail');
   };
 
   const goBack = () => {
-    setCurrentView(previousView);
-    if (previousView === 'feed') setViewingPost(null);
+    popView();
+  };
+
+  const revealSensitive = (postId: string) => {
+    setRevealedSensitivePosts(prev => new Set([...prev, postId]));
+  };
+
+  const PostImage = ({ post, user, className, onClick }: { post: any, user: any, className?: string, onClick?: () => void }) => {
+    const isSensitive = post.isSensitive && !revealedSensitivePosts.has(post.id);
+
+    return (
+      <div className={`relative overflow-hidden ${className}`} onClick={isSensitive ? () => revealSensitive(post.id) : onClick}>
+        <img 
+          src={post.image} 
+          alt="Post content" 
+          className={`w-full h-full object-cover transition-all duration-500 ${isSensitive ? 'blur-2xl scale-110' : ''}`}
+          referrerPolicy="no-referrer"
+        />
+        {isSensitive && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 text-white p-4 text-center cursor-pointer">
+            <X className="w-8 h-8 mb-2 opacity-50" />
+            <div className="font-bold text-sm mb-1">민감한 콘텐츠</div>
+            <div className="text-xs opacity-80">이 게시물에는 노출이 포함되어 있을 수 있습니다.</div>
+            <button className="mt-3 bg-white/20 hover:bg-white/30 px-4 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md transition-colors">
+              게시물 보기
+            </button>
+          </div>
+        )}
+      </div>
+    );
   };
 
   return (
@@ -111,12 +147,11 @@ export default function App() {
               </div>
 
               {/* Post Image */}
-              <img 
-                src={mainPost.image} 
-                alt="Post content" 
-                className="w-full aspect-square object-cover cursor-pointer"
-                onClick={() => openPostDetail(mainPost, mainPost.user)}
-                referrerPolicy="no-referrer"
+              <PostImage 
+                post={mainPost} 
+                user={mainPost.user} 
+                className="w-full aspect-square cursor-pointer" 
+                onClick={() => openPostDetail(mainPost, mainPost.user)} 
               />
 
               {/* Post Actions */}
@@ -271,13 +306,12 @@ export default function App() {
                   <div 
                     key={post.id} 
                     className="aspect-square relative group cursor-pointer"
-                    onClick={() => openPostDetail(post, selectedUser)}
                   >
-                    <img 
-                      src={post.image} 
-                      alt="Post" 
-                      className="w-full h-full object-cover"
-                      referrerPolicy="no-referrer"
+                    <PostImage 
+                      post={post} 
+                      user={selectedUser} 
+                      className="w-full h-full" 
+                      onClick={() => openPostDetail(post, selectedUser)} 
                     />
                   </div>
                 ))}
@@ -301,11 +335,10 @@ export default function App() {
 
               {/* Post Image */}
               <div className="w-full bg-black flex items-center justify-center">
-                <img 
-                  src={viewingPost.post.image} 
-                  alt="Post Detail" 
-                  className="w-full h-auto object-contain"
-                  referrerPolicy="no-referrer"
+                <PostImage 
+                  post={viewingPost.post} 
+                  user={viewingPost.user} 
+                  className="w-full h-auto" 
                 />
               </div>
 

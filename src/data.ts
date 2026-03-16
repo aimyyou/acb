@@ -193,8 +193,10 @@ users.eunha.posts = [
     caption: '큰맘 먹고 해본 코스프레... 😳 너무 부끄럽지만... 그래도 잘 나온 것 같아서 올려봐요... (도망)',
     hashtags: ['#코스프레', '#애니', '#부끄러움', '#취미생활'],
     likes: 112,
+    isSensitive: true,
     comments: [
-      { id: 'ec3', user: users.minwoo, text: '은하야 대박 ㅋㅋㅋ 완전 잘 어울리는데? ㅋㅋㅋ', likes: 15 }
+      { id: 'ec3', user: users.minwoo, text: '은하야 대박 ㅋㅋㅋ 완전 잘 어울리는데? ㅋㅋㅋ', likes: 15 },
+      { id: 'ec4', user: users.taesu, text: '은하야... 이런 취미가 있었어? 옷이 참... 잘 어울리네. 오빠랑 나중에 얘기 좀 할까? ^^', likes: 2 }
     ]
   }
 ];
@@ -217,8 +219,10 @@ users.haein.posts = [
     caption: '복근 체크 💪🔥 운동한 보람이 있네. 좀 과감한가? ㅋㅋㅋ 그래도 만족!',
     hashtags: ['#복근', '#오운완', '#바디체크', '#눈바디'],
     likes: 189,
+    isSensitive: true,
     comments: [
-      { id: 'hc3', user: users.minwoo, text: '누나 복근 지리는데? ㅋㅋㅋ 진짜 대박이다', likes: 12 }
+      { id: 'hc3', user: users.minwoo, text: '누나 복근 지리는데? ㅋㅋㅋ 진짜 대박이다', likes: 12 },
+      { id: 'hc4', user: users.taesu, text: '해인아... 운동을 얼마나 열심히 한 거야? 라인이 아주... 오빠가 맛있는 거 사주고 싶네~^^', likes: 1 }
     ]
   }
 ];
@@ -279,8 +283,12 @@ users.minwoo.posts = [
     caption: '복근 선명도 실화냐? 💪🔥 역시 식단이랑 운동은 배신하지 않아. 뿌듯하다!',
     hashtags: ['#복근', '#바디체크', '#헬스타그램', '#운동자극'],
     likes: 156,
+    isSensitive: true,
     comments: [
-      { id: 'mc3', user: users.eunha, text: '와... 진짜 대단하시네요... (부럽)', likes: 4 }
+      { id: 'mc3', user: users.jiyoon, text: '와 민우야... 진짜 대단하다! 노력의 결과네 👍', likes: 10 },
+      { id: 'mc4', user: users.haein, text: '민우야 누나 코피 터진다 ㅋㅋㅋ 운동 같이 하자니까?', likes: 25 },
+      { id: 'mc5', user: users.sojin, text: '오... 좀 치네. 근데 안 귀찮음?', likes: 5 },
+      { id: 'mc6', user: users.eunha, text: '와... 진짜 대단하시네요... (부럽)', likes: 4 }
     ]
   }
 ];
