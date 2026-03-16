@@ -288,7 +288,7 @@ users.minwoo.posts = [
 export const mainPost = {
   id: 'main_post',
   user: users.crack_univ,
-  image: 'https://chim9.chimul.uk/z.1.webp',
+  image: 'https://chim9.chimul.uk/z.27.webp',
   caption: '2026학년도 신입생 여러분 환영합니다! 🎉\n개강 첫 주, 다들 잘 적응하고 계신가요?\n새로운 시작을 응원합니다!\n\n#크랙대 #신입생 #개강 #26학번 #환영해요 #캠퍼스라이프',
   hashtags: ['#크랙대', '#신입생', '#개강', '#26학번', '#환영해요', '#캠퍼스라이프'],
   likes: 842,
