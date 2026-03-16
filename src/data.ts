@@ -3,7 +3,7 @@ export const users: any = {
     id: 'crack_univ',
     username: 'crack_univ_official_@_crack',
     name: '크랙대학교 공식 인별',
-    avatar: 'https://picsum.photos/seed/crack/150/150',
+    avatar: 'https://chim9.chimul.uk/z.27.webp',
     bio: '미래를 선도하는 크랙대학교 🎓\n공식 인별입니다.',
     followers: '12.5K',
     following: '10',
@@ -155,8 +155,8 @@ users.yuri.posts = [
   { 
     id: 'y1', 
     image: 'https://chim9.chimul.uk/z.9.webp', 
-    caption: '전공 서적 정리 완료. 이번 학기도 완벽하게 계획대로 진행할 것. 변수는 용납하지 않는다.',
-    hashtags: ['#공스타그램', '#ISTJ', '#계획표', '#완벽주의'],
+    caption: '바다 냄새가 좋다. 난간에 기대어 잠시 휴식 중. 생각 정리하기에 최적의 장소.',
+    hashtags: ['#바다', '#휴식', '#생각정리', '#힐링'],
     likes: 78,
     comments: [
       { id: 'yc1', user: users.jihoon, text: '정리 상태가 훌륭하군요. 참고하고 싶습니다.', likes: 10 },
@@ -166,8 +166,8 @@ users.yuri.posts = [
   { 
     id: 'y2', 
     image: 'https://chim9.chimul.uk/z.10.webp', 
-    caption: '도서관. 소음이 너무 심하다. 에티켓 좀 지켰으면.',
-    hashtags: ['#도서관', '#정숙', '#민폐금지'],
+    caption: '유럽의 고풍스러운 유적지. 역사의 숨결이 느껴지는 곳이다. 계획대로 모든 곳을 둘러보는 중.',
+    hashtags: ['#유럽여행', '#유적지', '#역사탐방', '#계획여행'],
     likes: 54,
     comments: [
       { id: 'yc3', user: users.eunha, text: '죄... 죄송해요... 저 아니죠...? ㅠㅠ', likes: 2 }

@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { Heart, MessageCircle, Send, Bookmark, Home, Search, PlusSquare, PlaySquare, User, ChevronLeft, MoreHorizontal, X } from 'lucide-react';
 import { mainPost, users } from './data';
 
-type ViewState = 'feed' | 'comments' | 'profile';
+type ViewState = 'feed' | 'comments' | 'profile' | 'postDetail';
 
 export default function App() {
   const [currentView, setCurrentView] = useState<ViewState>('feed');
+  const [previousView, setPreviousView] = useState<ViewState>('feed');
   const [selectedUser, setSelectedUser] = useState<any>(null);
   const [likedPosts, setLikedPosts] = useState<Set<string>>(new Set());
   const [viewingPost, setViewingPost] = useState<{ post: any, user: any } | null>(null);
@@ -23,26 +24,32 @@ export default function App() {
   };
 
   const navigateToProfile = (user: any) => {
+    setPreviousView(currentView);
     setSelectedUser(user);
     setCurrentView('profile');
     setViewingPost(null);
   };
 
   const navigateToComments = () => {
+    setPreviousView(currentView);
     setCurrentView('comments');
   };
 
   const navigateToFeed = () => {
+    setPreviousView('feed');
     setCurrentView('feed');
     setViewingPost(null);
   };
 
   const openPostDetail = (post: any, user: any) => {
+    setPreviousView(currentView);
     setViewingPost({ post, user });
+    setCurrentView('postDetail');
   };
 
-  const closePostDetail = () => {
-    setViewingPost(null);
+  const goBack = () => {
+    setCurrentView(previousView);
+    if (previousView === 'feed') setViewingPost(null);
   };
 
   return (
@@ -62,7 +69,7 @@ export default function App() {
           )}
           {currentView === 'comments' && (
             <>
-              <button onClick={navigateToFeed} className="p-1 -ml-1">
+              <button onClick={goBack} className="p-1 -ml-1">
                 <ChevronLeft className="w-7 h-7" />
               </button>
               <div className="font-semibold text-lg flex-1 text-center mr-6">댓글</div>
@@ -70,11 +77,19 @@ export default function App() {
           )}
           {currentView === 'profile' && (
             <>
-              <button onClick={() => setCurrentView('comments')} className="p-1 -ml-1">
+              <button onClick={goBack} className="p-1 -ml-1">
                 <ChevronLeft className="w-7 h-7" />
               </button>
               <div className="font-semibold text-lg flex-1 text-center font-mono">{selectedUser?.username}</div>
               <MoreHorizontal className="w-6 h-6" />
+            </>
+          )}
+          {currentView === 'postDetail' && (
+            <>
+              <button onClick={goBack} className="p-1 -ml-1">
+                <ChevronLeft className="w-7 h-7" />
+              </button>
+              <div className="font-semibold text-lg flex-1 text-center mr-6">게시물</div>
             </>
           )}
         </header>
@@ -269,106 +284,95 @@ export default function App() {
               </div>
             </div>
           )}
-        </main>
 
-        {/* Post Detail Modal */}
-        {viewingPost && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-4 sm:p-0">
-            <button 
-              onClick={closePostDetail}
-              className="absolute top-4 right-4 text-white p-2"
-            >
-              <X className="w-8 h-8" />
-            </button>
-            
-            <div className="bg-white w-full max-w-4xl h-full max-h-[90vh] flex flex-col md:flex-row rounded-lg overflow-hidden">
-              {/* Image Section */}
-              <div className="flex-1 bg-black flex items-center justify-center">
+          {currentView === 'postDetail' && viewingPost && (
+            <div className="flex flex-col animate-in fade-in slide-in-from-right duration-300">
+              {/* Post Header */}
+              <div className="flex items-center px-3 py-3 border-b border-gray-100">
+                <img 
+                  src={viewingPost.user.avatar} 
+                  alt={viewingPost.user.username} 
+                  className="w-8 h-8 rounded-full object-cover border border-gray-200"
+                  referrerPolicy="no-referrer"
+                />
+                <span className="ml-3 font-semibold text-sm">{viewingPost.user.username}</span>
+                <MoreHorizontal className="w-5 h-5 ml-auto text-gray-500" />
+              </div>
+
+              {/* Post Image */}
+              <div className="w-full bg-black flex items-center justify-center">
                 <img 
                   src={viewingPost.post.image} 
                   alt="Post Detail" 
-                  className="max-w-full max-h-full object-contain"
+                  className="w-full h-auto object-contain"
                   referrerPolicy="no-referrer"
                 />
               </div>
-              
-              {/* Content Section */}
-              <div className="w-full md:w-80 flex flex-col border-l border-gray-200 bg-white">
-                {/* Header */}
-                <div className="flex items-center p-4 border-b border-gray-200">
-                  <img 
-                    src={viewingPost.user.avatar} 
-                    alt={viewingPost.user.username} 
-                    className="w-8 h-8 rounded-full object-cover border border-gray-200"
-                    referrerPolicy="no-referrer"
-                  />
-                  <span className="ml-3 font-semibold text-sm">{viewingPost.user.username}</span>
-                  <MoreHorizontal className="w-5 h-5 ml-auto text-gray-500" />
+
+              {/* Post Actions */}
+              <div className="px-3 py-3">
+                <div className="flex justify-between items-center mb-3">
+                  <div className="flex space-x-4">
+                    <Heart 
+                      className={`w-6 h-6 cursor-pointer transition-colors ${likedPosts.has(viewingPost.post.id) ? 'text-red-500 fill-red-500' : 'hover:text-gray-500'}`} 
+                      onClick={() => toggleLike(viewingPost.post.id)}
+                    />
+                    <MessageCircle className="w-6 h-6 hover:text-gray-500 cursor-pointer" />
+                    <Send className="w-6 h-6 hover:text-gray-500 cursor-pointer" />
+                  </div>
+                  <Bookmark className="w-6 h-6 hover:text-gray-500 cursor-pointer" />
                 </div>
                 
-                {/* Comments/Caption Area */}
-                <div className="flex-1 overflow-y-auto p-4 space-y-4">
-                  <div className="flex space-x-3">
-                    <img 
-                      src={viewingPost.user.avatar} 
-                      alt={viewingPost.user.username} 
-                      className="w-8 h-8 rounded-full object-cover mt-1"
-                      referrerPolicy="no-referrer"
-                    />
-                    <div className="text-sm">
-                      <span className="font-semibold mr-2">{viewingPost.user.username}</span>
-                      <span className="whitespace-pre-wrap">{viewingPost.post.caption}</span>
-                      <div className="mt-2 text-blue-800 space-x-1">
-                        {viewingPost.post.hashtags?.map((tag: string) => (
-                          <span key={tag} className="cursor-pointer hover:underline">{tag}</span>
-                        ))}
-                      </div>
-                    </div>
+                <div className="font-semibold text-sm mb-1">
+                  좋아요 {viewingPost.post.likes + (likedPosts.has(viewingPost.post.id) ? 1 : 0)}개
+                </div>
+                
+                <div className="text-sm">
+                  <span className="font-semibold mr-2">{viewingPost.user.username}</span>
+                  <span className="whitespace-pre-wrap">{viewingPost.post.caption}</span>
+                  <div className="mt-2 text-blue-800 space-x-1">
+                    {viewingPost.post.hashtags?.map((tag: string) => (
+                      <span key={tag} className="cursor-pointer hover:underline">{tag}</span>
+                    ))}
                   </div>
-                  
-                  {/* Comments */}
+                </div>
+
+                {/* Comments List */}
+                <div className="mt-4 space-y-4 border-t border-gray-100 pt-4">
                   {viewingPost.post.comments?.map((comment: any) => (
-                    <div key={comment.id} className="flex space-x-3">
+                    <div key={comment.id} className="flex py-1">
                       <img 
                         src={comment.user.avatar} 
                         alt={comment.user.username} 
-                        className="w-8 h-8 rounded-full object-cover mt-1 cursor-pointer"
+                        className="w-8 h-8 rounded-full object-cover border border-gray-200 mt-1 cursor-pointer"
                         onClick={() => navigateToProfile(comment.user)}
                         referrerPolicy="no-referrer"
                       />
-                      <div className="text-sm">
-                        <span 
-                          className="font-semibold mr-2 cursor-pointer hover:underline"
-                          onClick={() => navigateToProfile(comment.user)}
-                        >
-                          {comment.user.username}
-                        </span>
-                        <span>{comment.text}</span>
-                        <div className="mt-1 text-xs text-gray-500">1시간 전</div>
+                      <div className="ml-3 flex-1">
+                        <div className="text-sm">
+                          <span 
+                            className="font-semibold mr-2 cursor-pointer hover:underline"
+                            onClick={() => navigateToProfile(comment.user)}
+                          >
+                            {comment.user.username}
+                          </span>
+                          <span>{comment.text}</span>
+                        </div>
+                        <div className="flex items-center mt-1 space-x-4 text-xs text-gray-500 font-semibold">
+                          <span>1시간 전</span>
+                          <span>좋아요 {comment.likes}개</span>
+                        </div>
+                      </div>
+                      <div className="ml-2 flex items-center">
+                        <Heart className="w-3 h-3 text-gray-400" />
                       </div>
                     </div>
                   ))}
                 </div>
-                
-                {/* Footer Actions */}
-                <div className="p-4 border-t border-gray-200">
-                  <div className="flex justify-between items-center mb-2">
-                    <div className="flex space-x-4">
-                      <Heart 
-                        className={`w-6 h-6 cursor-pointer transition-colors ${likedPosts.has(viewingPost.post.id) ? 'text-red-500 fill-red-500' : 'hover:text-gray-500'}`} 
-                        onClick={() => toggleLike(viewingPost.post.id)}
-                      />
-                      <MessageCircle className="w-6 h-6 hover:text-gray-500 cursor-pointer" />
-                      <Send className="w-6 h-6 hover:text-gray-500 cursor-pointer" />
-                    </div>
-                    <Bookmark className="w-6 h-6 hover:text-gray-500 cursor-pointer" />
-                  </div>
-                  <div className="font-semibold text-sm">좋아요 {viewingPost.post.likes + (likedPosts.has(viewingPost.post.id) ? 1 : 0)}개</div>
-                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
+        </main>
 
         {/* Bottom Navigation */}
         <nav className="flex justify-around items-center py-3 border-t border-gray-200 bg-white absolute bottom-0 w-full z-10">
